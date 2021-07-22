@@ -1,0 +1,4 @@
+Modificar variáveis de ambiente
+Finalizar os Schemas das entidades
+Finalizar as rotas
+Configurar os CRUD's para todas as entidades
