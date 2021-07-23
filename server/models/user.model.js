@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema();
+const Schema = mongoose.Schema;
 
-//Gerando um Schema para salvar os dados dos professores
-const professorSchema = new Schema({
-    username: {
+//Gerando um Schema para salvar os dados dos usuários
+const userSchema = new Schema({
+    email: {
         type: String,
         required: true,
         unique: true,
         trim: true,
-        minlenght: 4
+        minlength: 1
     },
     password: {
         type: String,
@@ -28,21 +28,25 @@ const professorSchema = new Schema({
     telephone_number: {
         type: String,
         required: true,
-        unique: true,
         trim: true,
         minlength: 11
     },
-    email: {
+    cpf: {
         type: String,
         required: true,
         unique: true,
         trim: true,
-        minlength: 1
+        minlength: 11
+    },
+    user_type: {
+        type: String,
+        required: true
     }
 },{
-    timestamps: true
+    timestamps: true,
+    versionkey: false
 });
 
-const Professor = mongoose.model('Professor', professorSchema);
+const User = mongoose.model('User', userSchema);
 
-module.exports = Professor;
+module.exports = User;

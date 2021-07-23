@@ -1,4 +1,7 @@
 Modificar variáveis de ambiente
-Finalizar os Schemas das entidades
+Finalizar os Schemas dos exercícios
 Finalizar as rotas
-Configurar os CRUD's para todas as entidades
+Configurar os CRUD's para as entidades
+Tirar a chave do código
+Pegar as funções para comparação de senha
+Esconder as variáveis de ambiente
