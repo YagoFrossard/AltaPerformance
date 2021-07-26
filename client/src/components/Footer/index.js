@@ -1,7 +1,6 @@
 import React from 'react';
 import './style.scss'
 import InstagramIcon from '@material-ui/icons/Instagram';
-import RedditIcon from '@material-ui/icons/Reddit';
 
 const Index = () => {
     return (
@@ -13,7 +12,7 @@ const Index = () => {
                 <a href="#"></a>
             </div>
             <p className="footer__copyright">
-                Desenvolvido por comedores de cu <RedditIcon/>
+                Seu Instagram aqui 
             </p>
         </footer>
     );
