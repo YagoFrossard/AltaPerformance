@@ -10,8 +10,10 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import logo_alta  from './assets/logo_alta.png'
-import Footer from './components/Footer'
+import logo_alta  from '../../assets/logo_alta.png'
+import Footer from '../../components/Footer'
+import { Link as LinkRouter } from 'react-router-dom';
+
 
 function Copyright() {
   return (
@@ -58,7 +60,9 @@ export default function SignIn() {
         <CssBaseline />
         <div className={classes.paper}>
         <Grid container justify = "center">
-          <img src={logo_alta} alt="Logo Alta Performance"></img>
+          <LinkRouter to="/">
+            <img src={logo_alta} alt="Logo Alta Performance"></img>
+          </LinkRouter>
         </Grid>
           <Typography className={classes.entrar} component="h1" variant="h5">
             Entrar
