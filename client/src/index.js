@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Login from './pages/Login/Login';
 import reportWebVitals from './reportWebVitals';
-import Yago from './components/Yago/yago';
+import Signup from './components/Signup/index';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 

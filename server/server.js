@@ -14,7 +14,7 @@ app.use(express.json());
 
 //Configurando conexão com o MongoDB
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true});
+mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true });
 const connection = mongoose.connection;
 
 //Conexão estabelecida...

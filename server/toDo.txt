@@ -5,3 +5,4 @@ Configurar os CRUD's para as entidades
 Tirar a chave do código
 Pegar as funções para comparação de senha
 Esconder as variáveis de ambiente
+Mudar o post do axios (user_type) na página de signup

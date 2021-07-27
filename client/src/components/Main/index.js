@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route, BrowserRouter as Router, Link } from 'react-router-dom';
 
-import Yago from '../Yago/yago';
+import Signup from '../Signup/index';
 import LoginPage from '../../pages/Login/Login';
 import Index from '../Main/index';
 
@@ -12,7 +12,7 @@ import Index from '../Main/index';
 const Main = () => {
     return (
         <Router>
-            <Route exact path='/signup' component={Yago}></Route>
+            <Route exact path='/signup' component={Signup}></Route>
             <Route exact path='/login' component={LoginPage}></Route>
         </Router>
     );
