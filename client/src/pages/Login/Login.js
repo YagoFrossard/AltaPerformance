@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -10,9 +10,10 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import logo_alta  from '../../assets/logo_alta.png'
+import logo_alta from '../../assets/logo_alta.png'
 import Footer from '../../components/Footer'
 import { Link as LinkRouter } from 'react-router-dom';
+import axios from 'axios';
 
 
 function Copyright() {
@@ -27,6 +28,20 @@ function Copyright() {
     </Typography>
   );
 }
+/*
+const onSubmit = (e) => {
+  e.preventDefault();
+  const loginData = {
+    email,
+    password
+  };
+
+  axios.post('http://localhost/auth/login', loginData)
+    .then(() => {
+      this.props.history.push('/dashboard')
+    })
+    .catch(err => console.log(err));
+}*/
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,11 +53,11 @@ const useStyles = makeStyles((theme) => ({
     padding: '25px',
     borderRadius: '10px'
   },
-  entrar:{
+  entrar: {
     marginTop: theme.spacing(3)
   },
   form: {
-    width: '100%', 
+    width: '100%',
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -59,11 +74,11 @@ export default function SignIn() {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
-        <Grid container justify = "center">
-          <LinkRouter to="/">
-            <img src={logo_alta} alt="Logo Alta Performance"></img>
-          </LinkRouter>
-        </Grid>
+          <Grid container justify="center">
+            <LinkRouter to="/">
+              <img src={logo_alta} alt="Logo Alta Performance"></img>
+            </LinkRouter>
+          </Grid>
           <Typography className={classes.entrar} component="h1" variant="h5">
             Entrar
           </Typography>
@@ -100,12 +115,13 @@ export default function SignIn() {
               variant="contained"
               color="secondary"
               className={classes.submit}
+              //onClick={onSubmit}
             >
               Avançar
             </Button>
             <Grid container direction="column">
-            <Grid item>
-              {"Não tem uma conta? "}
+              <Grid item>
+                {"Não tem uma conta? "}
                 <Link color="secondary" href="#" variant="body2">
                   Solicite uma!
                 </Link>
@@ -122,7 +138,7 @@ export default function SignIn() {
           <Copyright />
         </Box>
       </Container>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

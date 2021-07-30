@@ -2,9 +2,8 @@
 
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
-const saltRounds = 3;
 let User = require('../models/user.model');
-const salt = bcrypt.genSaltSync(saltRounds);
+const salt = 3;
 
 router.route('/').get((req, res) => {
     User.find()
@@ -12,10 +11,11 @@ router.route('/').get((req, res) => {
         .catch(err => res.status(400).json(`Erro: ${err}`));
 });
 
+
 router.route('/add').post((req, res) => {
     //Gerando senha com hash
     const email = req.body.email;
-    const password = bcrypt.hashSync(req.body.password, salt);
+    const password = bcrypt.hashSync(req.body.password, salt)
     const name = req.body.name;
     const telephone_number = req.body.telephone_number;
     const cpf = req.body.cpf;

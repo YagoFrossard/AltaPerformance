@@ -2,7 +2,7 @@ Modificar variáveis de ambiente
 Finalizar os Schemas dos exercícios
 Finalizar as rotas
 Configurar os CRUD's para as entidades
-Tirar a chave do código
-Pegar as funções para comparação de senha
 Esconder as variáveis de ambiente
 Mudar o post do axios (user_type) na página de signup
+Tentar mudar a autenticação de login para assíncrona
+Mudar os caminhos para o site

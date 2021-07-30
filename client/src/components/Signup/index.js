@@ -63,7 +63,7 @@ export default function Signup() {
     }, [senha]
   )
 
-  const saveState = () => {
+  const onSubmit = () => {
     const user = {
       email: email,
       password: senha,
@@ -89,7 +89,7 @@ export default function Signup() {
       <br></br>
       Senha: <input type="text" value={senha} onChange={(event) => setSenha(event.target.value)} />
       <br></br>
-      <button type="submit" onClick={saveState}>Salvar</button>
+      <button type="submit" onClick={onSubmit}>Salvar</button>
       <br></br>
       Olá {nome} seu e-mail é {email}, telefone: {telefone}, CPF: {cpf} e senha: {senha}.
       <br></br>
