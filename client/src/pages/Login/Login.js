@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -12,9 +12,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import logo_alta from '../../assets/logo_alta.png'
 import Footer from '../../components/Footer'
-import { Link as LinkRouter } from 'react-router-dom';
+import { Link as LinkRouter, useHistory, Redirect } from 'react-router-dom';
 import axios from 'axios';
-
 
 function Copyright() {
   return (
@@ -28,20 +27,6 @@ function Copyright() {
     </Typography>
   );
 }
-/*
-const onSubmit = (e) => {
-  e.preventDefault();
-  const loginData = {
-    email,
-    password
-  };
-
-  axios.post('http://localhost/auth/login', loginData)
-    .then(() => {
-      this.props.history.push('/dashboard')
-    })
-    .catch(err => console.log(err));
-}*/
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -65,9 +50,67 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export default function SignIn() {
   const classes = useStyles();
+  const [email, setEmail] = useState(undefined);
+  const [password, setPassword] = useState(undefined);
+  const [redirect, setRedirect] = useState(false);
+  let history = useHistory();
+
+  useEffect(
+    () => {
+      let session;
+
+      axios.get('http://localhost:5000/session/', session)
+        .then(() => {
+          if (!session) setRedirect(false);
+          else {
+            setRedirect(true);
+          }
+        })
+        .catch(err => console.log(err));
+
+      if (redirect) {
+        return (<Redirect to='/dashboard' />);
+      }
+    }, [redirect]
+  )
+
+  useEffect(
+    () => {
+      if (email == undefined) {
+        setEmail(sessionStorage.getItem('email') || '');
+      }
+      else {
+        sessionStorage.setItem('email', email);
+      }
+    }, [email]
+  )
+
+  useEffect(
+    () => {
+      if (password == undefined) {
+        setPassword(sessionStorage.getItem('password') || '');
+      }
+      else {
+        sessionStorage.setItem('password', password);
+      }
+    }, [password]
+  )
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const loginData = {
+      email: email,
+      password: password
+    };
+
+    axios.post('http://localhost:5000/auth/login', loginData)
+      .then(() => {
+        history.push('/dashboard');
+      })
+      .catch(err => console.log(err));
+  }
 
   return (
     <div>
@@ -93,6 +136,8 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
             />
             <TextField
               variant="outlined"
@@ -104,6 +149,8 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="secondary" />}
@@ -115,7 +162,7 @@ export default function SignIn() {
               variant="contained"
               color="secondary"
               className={classes.submit}
-              //onClick={onSubmit}
+              onClick={onSubmit}
             >
               Avançar
             </Button>

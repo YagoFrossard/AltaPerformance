@@ -11,7 +11,6 @@ router.route('/').get((req, res) => {
         .catch(err => res.status(400).json(`Erro: ${err}`));
 });
 
-
 router.route('/add').post((req, res) => {
     //Gerando senha com hash
     const email = req.body.email;

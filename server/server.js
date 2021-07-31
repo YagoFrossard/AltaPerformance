@@ -27,6 +27,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
 app.use(
     session({
+        cookie: {
+            maxAge: 1800000
+        },
         secret: 'auth-token',
         resave: false,
         saveUninitialized: true,

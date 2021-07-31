@@ -9,7 +9,6 @@ import Dashboard from '../../pages/Dashboard/Dashboard'
 //<Route exact path='/' component={Index}></Route>
 //<Route exact path='/signup' component={Yago}></Route>
 
-
 const Main = () => {
     return (
         <Router>
