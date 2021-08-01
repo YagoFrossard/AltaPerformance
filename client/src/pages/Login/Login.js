@@ -59,25 +59,6 @@ export default function SignIn() {
 
   useEffect(
     () => {
-      let session;
-
-      axios.get('http://localhost:5000/session/', session)
-        .then(() => {
-          if (!session) setRedirect(false);
-          else {
-            setRedirect(true);
-          }
-        })
-        .catch(err => console.log(err));
-
-      if (redirect) {
-        return (<Redirect to='/dashboard' />);
-      }
-    }, [redirect]
-  )
-
-  useEffect(
-    () => {
       if (email == undefined) {
         setEmail(sessionStorage.getItem('email') || '');
       }
@@ -105,7 +86,12 @@ export default function SignIn() {
       password: password
     };
 
-    axios.post('http://localhost:5000/auth/login', loginData)
+    axios.post('http://localhost:5000/auth/login', loginData, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      withCredentials: true
+    })
       .then(() => {
         history.push('/dashboard');
       })

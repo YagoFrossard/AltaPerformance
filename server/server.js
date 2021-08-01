@@ -21,25 +21,35 @@ connection.once('open', () => {
     console.log(`Conexão com o banco de dados estabelecida. Status = ${mongoose.connection.readyState}`);
 });
 
+const sessionSecret = process.env.SESSION_SECRET;
 //Utilizando middlewares
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+    methods: ['POST','PUT','OPTIONS','GET','HEAD']
+}));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false}));
+app.use(express.urlencoded({ extended: true }));
 app.use(
     session({
-        cookie: {
-            maxAge: 1800000
-        },
-        secret: 'auth-token',
+        secret: sessionSecret,
         resave: false,
-        saveUninitialized: true,
-        store: MongoStore.create({mongoUrl: uri})
+        saveUninitialized: false,
+        store: MongoStore.create({mongoUrl: uri}),
+        cookie: {
+            maxAge: 15 * 60 * 1000
+        }
     })
 );
 
 //Usando o middleware do passport
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.get('/', (req, res, next) => {
+    res.send(req.user.name);
+    next();
+});
 
 //Criando e definindo as rotas do sistema
 const userRouter = require('./routes/users');
