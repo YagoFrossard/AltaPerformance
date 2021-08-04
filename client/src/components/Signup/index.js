@@ -6,6 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Dashboard from '../../pages/Dashboard/Dashboard';
 
   const useStyles = makeStyles((theme) => ({
     paper: {
@@ -59,6 +60,10 @@ import Typography from '@material-ui/core/Typography';
       }
     }, [nome]
   )
+
+  useEffect(() => { 
+    document.body.style.background = 'white' 
+  }, [])
 
   useEffect(
     () => {
@@ -120,6 +125,7 @@ import Typography from '@material-ui/core/Typography';
 
   return (
     <div>
+    <Dashboard></Dashboard>
     <Container 
     component="main" maxWidth="xs">
     <CssBaseline />

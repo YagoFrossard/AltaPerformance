@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex-start',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    backgroundColor: 'white',
     padding: '25px',
     borderRadius: '10px'
   },
@@ -68,6 +67,10 @@ export default function SignIn() {
     }, [email]
   )
 
+  useEffect(() => { 
+    document.body.style.background = 'linear-gradient(165deg, rgba(255,229,228,1) 0%, rgba(232,239,197,1) 100%)' 
+  }, [])
+
   useEffect(
     () => {
       if (password == undefined) {
@@ -78,6 +81,7 @@ export default function SignIn() {
       }
     }, [password]
   )
+
 
   const onSubmit = (e) => {
     e.preventDefault();
