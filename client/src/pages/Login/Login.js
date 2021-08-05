@@ -35,7 +35,8 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'flex-start',
     padding: '25px',
-    borderRadius: '10px'
+    borderRadius: '10px',
+    backgroundColor: 'white'
   },
   entrar: {
     marginTop: theme.spacing(3)
@@ -108,7 +109,7 @@ export default function SignIn() {
         <CssBaseline />
         <div className={classes.paper}>
           <Grid container justify="center">
-            <LinkRouter to="/">
+            <LinkRouter to="/login">
               <img src={logo_alta} alt="Logo Alta Performance"></img>
             </LinkRouter>
           </Grid>

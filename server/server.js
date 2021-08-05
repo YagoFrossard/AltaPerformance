@@ -47,9 +47,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/', (req, res, next) => {
-    res.send(req.user.name);
+    if(req.user){
+        res.send({"name": req.user.name, "userType": req.user.user_type});
+    }else{
+        res.send({'name': 'not logged'});
+    }
     next();
 });
+
+app.get('/logout', (req, res, next) => {
+    req.logout();
+    return res.status(200).json({success: 'Deslogado com sucesso'});
+})
 
 //Criando e definindo as rotas do sistema
 const userRouter = require('./routes/users');
