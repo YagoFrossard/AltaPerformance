@@ -31,13 +31,6 @@ const userSchema = new Schema({
         trim: true,
         minlength: 11
     },
-    cpf: {
-        type: String,
-        required: true,
-        unique: true,
-        trim: true,
-        minlength: 11
-    },
     user_type: {
         type: String,
         required: true

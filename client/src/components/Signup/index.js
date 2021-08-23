@@ -47,7 +47,6 @@ import Dashboard from '../../pages/Dashboard/Dashboard';
     const [nome, setNome] = useState(undefined);
     const [email, setEmail] = useState(undefined);
     const [telefone, setTelefone] = useState(undefined);
-    const [cpf, setCpf] = useState(undefined);
     const [senha, setSenha] = useState(undefined);
 
   useEffect(
@@ -89,17 +88,6 @@ import Dashboard from '../../pages/Dashboard/Dashboard';
 
   useEffect(
     () => {
-      if (cpf == undefined) {
-        setCpf(sessionStorage.getItem('cpf') || '');
-      }
-      else {
-        sessionStorage.setItem('cpf', cpf);
-      }
-    }, [cpf]
-  )
-
-  useEffect(
-    () => {
       if (senha == undefined) {
         setSenha(sessionStorage.getItem('senha') || '');
       }
@@ -115,7 +103,6 @@ import Dashboard from '../../pages/Dashboard/Dashboard';
       password: senha,
       name: nome,
       telephone_number: telefone,
-      cpf: cpf,
       user_type: "ALUNO"
     }
 
@@ -162,16 +149,6 @@ import Dashboard from '../../pages/Dashboard/Dashboard';
       required
       fullWidth
       onChange={(event) => setTelefone(event.target.value)} />
-      <br></br>
-      <TextField 
-      type="text" 
-      value={cpf} 
-      label="CPF"
-      variant="outlined"
-      margin="normal"
-      required
-      fullWidth
-      onChange={(event) => setCpf(event.target.value)} />
       <br></br>
       <TextField 
       type="text" 

@@ -17,7 +17,6 @@ router.route('/add').post((req, res) => {
     const password = bcrypt.hashSync(req.body.password, salt)
     const name = req.body.name;
     const telephone_number = req.body.telephone_number;
-    const cpf = req.body.cpf;
     const user_type = req.body.user_type;
 
     const newUser = new User({
@@ -25,7 +24,6 @@ router.route('/add').post((req, res) => {
         password,
         name,
         telephone_number,
-        cpf,
         user_type
     });
 
