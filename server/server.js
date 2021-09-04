@@ -55,6 +55,11 @@ app.get('/', (req, res, next) => {
     next();
 });
 
+app.get('/isAuthenticated', (req, res, next) => {
+    res.send({"isAuth": req.isAuthenticated()});
+    next();
+})
+
 app.get('/logout', (req, res, next) => {
     req.logout();
     return res.status(200).json({success: 'Deslogado com sucesso'});
