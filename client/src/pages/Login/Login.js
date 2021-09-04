@@ -98,6 +98,7 @@ export default function SignIn() {
       withCredentials: true
     })
       .then(() => {
+        localStorage.setItem('@alta-performanceToken', '123');
         history.push('/dashboard');
       })
       .catch(err => console.log(err));

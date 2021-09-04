@@ -69,6 +69,7 @@ export default function Dashboard() {
             }, withCredentials: true
         })
             .then(() => {
+                localStorage.removeItem('@alta-performanceToken');
                 history.push('/login');
             })
             .catch(err => console.log(err + "Erro ao deslogar"));

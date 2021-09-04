@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {Redirect} from "react-router-dom";
+import {Redirect, Route} from "react-router-dom";
 import axios from "axios";
 
-class Index extends Component {
+/*class Index extends Component {
     render() {
         const Node = this.props.component;
         function isAuthenticated(){
@@ -21,20 +21,20 @@ class Index extends Component {
                 })
                 .catch(err => console.log(err));
         }
-        /*const isAuthenticated = axios.get('http://localhost:5000/isAuthenticated', {
-            headers: {
-                'Content-Type': 'application/json'
-            }, withCredentials: true
-        })
-            .then(res => {
-                if(res.data.isAuth) {
-                    return true
-                }
-                else {
-                    return false
-                }
-            })
-            .catch(err => console.log(err));*/
+        // const isAuthenticated = axios.get('http://localhost:5000/isAuthenticated', {
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }, withCredentials: true
+        // })
+        //     .then(res => {
+        //         if(res.data.isAuth) {
+        //             return true
+        //         }
+        //         else {
+        //             return false
+        //         }
+        //     })
+        //     .catch(err => console.log(err));
 
         return isAuthenticated() ? (
             <Node />
@@ -42,6 +42,27 @@ class Index extends Component {
             <Redirect to={{ pathname: '/login' }} />
         );
     }
-}
+}*/
+
+const Index = ({ component: Component, auth, ...rest }) => {
+    React.useEffect(() => {
+        // EXECUTE THE CODE ONLY ONCE WHEN COMPONENT IS MOUNTED
+    }, []);
+
+    const isAuthenticated = () => localStorage.getItem('@alta-performanceToken') !== null;
+
+    return (
+        <Route
+            {...rest}
+            render={(props) =>
+                isAuthenticated() ? (
+                    <Component {...props} />
+                ) : (
+                    <Redirect to="/login" />
+                )
+            }
+        />
+    );
+};
 
 export default Index;
