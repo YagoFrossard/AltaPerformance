@@ -12,6 +12,7 @@ import PlaylistAddCheckOutlinedIcon from '@material-ui/icons/PlaylistAddCheckOut
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Redirect, useHistory } from 'react-router-dom';
+import {logout as logoutAuth} from "../../containers/ServiceAuth";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -69,7 +70,7 @@ export default function Dashboard() {
             }, withCredentials: true
         })
             .then(() => {
-                localStorage.removeItem('@alta-performanceToken');
+                logoutAuth();
                 history.push('/login');
             })
             .catch(err => console.log(err + "Erro ao deslogar"));

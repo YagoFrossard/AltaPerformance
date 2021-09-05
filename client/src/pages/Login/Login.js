@@ -14,6 +14,7 @@ import logo_alta from '../../assets/logo_alta.png'
 import Footer from '../../components/Footer'
 import { Link as LinkRouter, useHistory, Redirect } from 'react-router-dom';
 import axios from 'axios';
+import {login} from "../../containers/ServiceAuth";
 
 function Copyright() {
   return (
@@ -98,7 +99,7 @@ export default function SignIn() {
       withCredentials: true
     })
       .then(() => {
-        localStorage.setItem('@alta-performanceToken', '123');
+        login('123');
         history.push('/dashboard');
       })
       .catch(err => console.log(err));

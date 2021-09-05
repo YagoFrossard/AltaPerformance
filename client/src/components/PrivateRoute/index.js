@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect, Route} from "react-router-dom";
 import axios from "axios";
+import {isAuthenticated} from "../../containers/ServiceAuth";
 
 /*class Index extends Component {
     render() {
@@ -48,8 +49,6 @@ const Index = ({ component: Component, auth, ...rest }) => {
     React.useEffect(() => {
         // EXECUTE THE CODE ONLY ONCE WHEN COMPONENT IS MOUNTED
     }, []);
-
-    const isAuthenticated = () => localStorage.getItem('@alta-performanceToken') !== null;
 
     return (
         <Route
