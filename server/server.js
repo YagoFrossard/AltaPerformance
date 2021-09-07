@@ -22,25 +22,32 @@ connection.once('open', () => {
 });
 
 const sessionSecret = process.env.SESSION_SECRET;
-//Utilizando middlewares
+
+//Configurando o CORS
 app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true,
     methods: ['POST','PUT','OPTIONS','GET','HEAD']
 }));
+
+// 'Parser' para as requisições que tenham conteúdo em 'application/json'
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(
-    session({
-        secret: sessionSecret,
-        resave: false,
-        saveUninitialized: false,
-        store: MongoStore.create({mongoUrl: uri}),
-        cookie: {
-            maxAge: 15 * 60 * 1000
-        }
-    })
-);
+
+// 'Parser' para as requisições que tenham conteúdo em 'application/x-www-form-urlencoded'
+app.use(express.urlencoded({ extended: false }));
+
+// Configura um SessionStorage (Não vamos usar este método 🙃 )
+// app.use(
+//     session({
+//         secret: sessionSecret,
+//         resave: false,
+//         saveUninitialized: false,
+//         store: MongoStore.create({mongoUrl: uri}),
+//         cookie: {
+//             maxAge: 15 * 60 * 1000
+//         }
+//     })
+// );
 
 //Usando o middleware do passport
 app.use(passport.initialize());
@@ -68,11 +75,19 @@ app.get('/logout', (req, res, next) => {
 //Criando e definindo as rotas do sistema
 const userRouter = require('./routes/users');
 const loginRouter = require('./routes/authenticate');
+const secureRouter = require('./routes/secure-routes');
 //const exerciseRouter = require('./routes/exercises');
 
 app.use('/users', userRouter);
 app.use('/auth', loginRouter);
+app.use('/secure', passport.authenticate('jwt', { session: false }), secureRouter);
 //app.use('/exercises', exerciseRouter);
+
+// Handle errors.
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.json({ error: err });
+});
 
 //Inicializando o servidor 
 app.listen(port, () => {

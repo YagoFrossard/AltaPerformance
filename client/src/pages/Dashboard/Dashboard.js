@@ -12,7 +12,8 @@ import PlaylistAddCheckOutlinedIcon from '@material-ui/icons/PlaylistAddCheckOut
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Redirect, useHistory } from 'react-router-dom';
-import {logout as logoutAuth} from "../../containers/ServiceAuth";
+import {logout as logoutAuth} from "../../services/auth.service";
+import authHeader from "../../services/auth.header";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -41,12 +42,14 @@ export default function Dashboard() {
     let history = useHistory();
 
     useEffect(() => {
-        axios.get('http://localhost:5000/', {
-            headers: {
-                'Content-Type': 'application/json'
-            }, withCredentials: true
+        axios.get('http://localhost:5000/secure/profile', {
+            headers: authHeader(),
+            withCredentials: true
         })
-            .then(res => setUser(res.data.name))
+            .then(res => {
+                setUser(res.data.user.email);
+                console.log(res.data);
+            })
             .catch(err => console.log(err));
     }, [])
 
@@ -76,6 +79,21 @@ export default function Dashboard() {
             .catch(err => console.log(err + "Erro ao deslogar"));
     }
 
+    // TODO :   Criar página bonitinha pro perfil do usuário
+    //          Refazer a side-bar com mr-auto e as paradas melhores com for...
+    const paginaPerfil = (e) => {
+        e.preventDefault();
+        axios.get('http://localhost:5000/secure/profile', {
+            headers: authHeader(),
+            withCredentials: true
+        })
+            .then((res) => {
+                setUser(res.data.user.email);
+                console.log("Acesso a página segura concedido!");
+            })
+            .catch(err => console.log(err + "Não foi possivel acessar página segura !! XX"));
+    }
+
 
     return (
         <div>
@@ -88,7 +106,11 @@ export default function Dashboard() {
                         ALTA
                         <>PERFORMANCE</>
                     </Typography>
-                    <AccountCircleIcon className={classes.avataricon} style={{ fontSize: 50 }} ></AccountCircleIcon>
+                    <AccountCircleIcon
+                        className={classes.avataricon}
+                        style={{ fontSize: 50 }}
+                        onClick={paginaPerfil}
+                    ></AccountCircleIcon>
                     <Typography align={"right"}>
                         {"Bem-Vindo, " + loggedUser + " "}
                         {new Date(hora).toLocaleDateString() + " " + new Date(hora).toLocaleTimeString()}

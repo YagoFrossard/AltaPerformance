@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect, Route} from "react-router-dom";
 import axios from "axios";
-import {isAuthenticated} from "../../containers/ServiceAuth";
+import {isAuthenticated} from "../../services/auth.service";
 
 /*class Index extends Component {
     render() {
@@ -44,6 +44,8 @@ import {isAuthenticated} from "../../containers/ServiceAuth";
         );
     }
 }*/
+
+// TODO :   Buscar saber como fazer a private-route com JWT
 
 const Index = ({ component: Component, auth, ...rest }) => {
     React.useEffect(() => {

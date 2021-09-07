@@ -14,7 +14,7 @@ import logo_alta from '../../assets/logo_alta.png'
 import Footer from '../../components/Footer'
 import { Link as LinkRouter, useHistory, Redirect } from 'react-router-dom';
 import axios from 'axios';
-import {login} from "../../containers/ServiceAuth";
+import {login} from "../../services/auth.service";
 
 function Copyright() {
   return (
@@ -60,12 +60,7 @@ export default function SignIn() {
 
   useEffect(
     () => {
-      if (email == undefined) {
-        setEmail(sessionStorage.getItem('email') || '');
-      }
-      else {
-        sessionStorage.setItem('email', email);
-      }
+      setEmail(email);
     }, [email]
   )
 
@@ -75,12 +70,7 @@ export default function SignIn() {
 
   useEffect(
     () => {
-      if (password == undefined) {
-        setPassword(sessionStorage.getItem('password') || '');
-      }
-      else {
-        sessionStorage.setItem('password', password);
-      }
+      setPassword(password);
     }, [password]
   )
 
@@ -98,9 +88,12 @@ export default function SignIn() {
       },
       withCredentials: true
     })
-      .then(() => {
-        login('123');
+      .then((response) => {
+        if (response.data.token) {
+          login(JSON.stringify(response.data));
+        }
         history.push('/dashboard');
+        return response.data;
       })
       .catch(err => console.log(err));
   }
