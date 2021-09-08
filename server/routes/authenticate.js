@@ -4,28 +4,55 @@ const jwt = require("jsonwebtoken");
 
 require('dotenv').config();
 
-router.route('/login').post((req, res, next) => {
-    passport.authenticate('local',function(err, user, info)  {
-        if(err){
-            return res.status(400).json({errors: "Erro"});
-        }
-        if(!user){
-            return res.status(400).json({errors: "Usuário não validado"});
-        }
-        req.logIn(user, { session: false}, function(err) {
-            if(err){
-                return res.status(400).json({errors: err});
-            }
+// const {
+//     getToken,
+//     //COOKIE_OPTIONS,
+//     getRefreshToken,
+//     verifyUser,
+// } = require("../authenticate");
 
-            const body = { _id: user._id, email: user.email };
-            const token = jwt.sign({ user: body }, process.env.TOKEN_SECRET);
+// router.post("/login", passport.authenticate("local"), (req, res, next) => {
+//     const token = getToken({ _id: req.user._id });
+//     const refreshToken = getRefreshToken({ _id: req.user._id });
+//     User.findById(req.user._id).then(
+//         (user) => {
+//             //user.refreshToken.push({ refreshToken });
+//             user.save((err, user) => {
+//                 if (err) {
+//                     res.statusCode = 500;
+//                     res.send(err);
+//                 } else {
+//                     //res.cookie("refreshToken", refreshToken, COOKIE_OPTIONS);
+//                     res.send({ success: true, token });
+//                 }
+//             });
+//         },
+//         (err) => next(err)
+//     );
+// });
 
-            return res.json({ token });
-
-            // return res.status(200).json({success: `Logado como ${user.id}`});
-        });
-    })(req, res, next);
-});
+// router.route('/login').post((req, res, next) => {
+//     passport.authenticate('local',function(err, user, info)  {
+//         if(err){
+//             return res.status(400).json({errors: "Erro"});
+//         }
+//         if(!user){
+//             return res.status(400).json({errors: "Usuário não validado"});
+//         }
+//         req.logIn(user, { session: false}, function(err) {
+//             if(err){
+//                 return res.status(400).json({errors: err});
+//             }
+//
+//             const body = { _id: user._id, email: user.email };
+//             const token = jwt.sign({ user: body }, process.env.TOKEN_SECRET);
+//
+//             return res.json({ token });
+//
+//             // return res.status(200).json({success: `Logado como ${user.id}`});
+//         });
+//     })(req, res, next);
+// });
 
 // router.post(
 //     '/login',

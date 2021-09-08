@@ -47,7 +47,7 @@ export default function Dashboard() {
             withCredentials: true
         })
             .then(res => {
-                setUser(res.data.user.email);
+                setUser(res.data.user.name);
                 console.log(res.data);
             })
             .catch(err => console.log(err));

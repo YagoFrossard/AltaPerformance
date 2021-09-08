@@ -82,7 +82,7 @@ export default function SignIn() {
       password: password
     };
 
-    axios.post('http://localhost:5000/auth/login', loginData, {
+    axios.post('http://localhost:5000/user/login', loginData, {
       headers: {
         'Content-Type': 'application/json'
       },

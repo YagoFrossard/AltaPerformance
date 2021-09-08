@@ -51,14 +51,15 @@ app.use(express.urlencoded({ extended: false }));
 
 //Usando o middleware do passport
 app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.session());
 
 app.get('/', (req, res, next) => {
-    if(req.user){
-        res.send({"name": req.user.name, "userType": req.user.user_type});
-    }else{
-        res.send({'name': 'not logged'});
-    }
+    // if(req.user){
+    //     res.send({"name": req.user.name, "userType": req.user.user_type});
+    // }else{
+    //     res.send({'name': 'not logged'});
+
+    res.send({status: "sucesso"});
     next();
 });
 
@@ -74,12 +75,12 @@ app.get('/logout', (req, res, next) => {
 
 //Criando e definindo as rotas do sistema
 const userRouter = require('./routes/users');
-const loginRouter = require('./routes/authenticate');
+//const loginRouter = require('./routes/authenticate');
 const secureRouter = require('./routes/secure-routes');
 //const exerciseRouter = require('./routes/exercises');
 
-app.use('/users', userRouter);
-app.use('/auth', loginRouter);
+app.use('/user', userRouter);
+//app.use('/auth', loginRouter);
 app.use('/secure', passport.authenticate('jwt', { session: false }), secureRouter);
 //app.use('/exercises', exerciseRouter);
 

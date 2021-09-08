@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require("bcrypt");
 
 const Schema = mongoose.Schema;
+const passportLocalMongoose = require("passport-local-mongoose");
 
 //Gerando um Schema para salvar os dados dos usuários
 const userSchema = new Schema({
@@ -60,6 +61,14 @@ userSchema.methods.isValidPassword = async function(password) {
 
     return compare;
 }
+
+//Utiliza das opções do plugin passport-local-mongoose para definir o campo 'email' como 'username' na hora de logar
+//https://github.com/saintedlama/passport-local-mongoose#options
+const localMongooseOptions = {
+    usernameField : "email"
+}
+
+userSchema.plugin(passportLocalMongoose, localMongooseOptions);
 
 const User = mongoose.model('User', userSchema);
 
