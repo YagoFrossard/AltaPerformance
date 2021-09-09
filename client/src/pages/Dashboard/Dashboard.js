@@ -37,17 +37,20 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
     const [hora, setHora] = useState(Date());
-    const [loggedUser, setUser] = useState(null);
+    const [loggedUser, setUser] = useState(null)
+    const [userType, setUserType] = useState(null)
+    const [navBarAtiva, setNavbar] = useState(false)
     const classes = useStyles();
     let history = useHistory();
 
     useEffect(() => {
-        axios.get('http://localhost:5000/secure/profile', {
+        axios.get('http://localhost:5000/user/me', {
             headers: authHeader(),
             withCredentials: true
         })
             .then(res => {
-                setUser(res.data.user.name);
+                setUser(res.data.name);
+                setUserType(res.data.user_type);
                 console.log(res.data);
             })
             .catch(err => console.log(err));
@@ -88,12 +91,15 @@ export default function Dashboard() {
             withCredentials: true
         })
             .then((res) => {
-                setUser(res.data.user.email);
+                setUser(res.data.email);
                 console.log("Acesso a página segura concedido!");
             })
             .catch(err => console.log(err + "Não foi possivel acessar página segura !! XX"));
     }
 
+    const navBarAbrir = () => {
+        setNavbar(!navBarAtiva);
+    }
 
     return (
         <div>
@@ -102,14 +108,14 @@ export default function Dashboard() {
                     <IconButton className={classes.menuButton} edge="start" color="inherit" aria-label="menu">
                         <ViewModuleIcon fontSize={'large'} />
                     </IconButton>
-                    <Typography align={"flexDirection"} variant={"h6"} className={classes.title}>
+                    <Typography align={"flexDirection"} variant={"h6"} className={classes.title} style={{ marginLeft : navBarAtiva ? 170 : 0}}>
                         ALTA
                         <>PERFORMANCE</>
                     </Typography>
                     <AccountCircleIcon
                         className={classes.avataricon}
                         style={{ fontSize: 50 }}
-                        onClick={paginaPerfil}
+                        onToggle={paginaPerfil}
                     ></AccountCircleIcon>
                     <Typography align={"right"}>
                         {"Bem-Vindo, " + loggedUser + " "}
@@ -129,6 +135,7 @@ export default function Dashboard() {
                 onSelect={(selected) => {
                     // Add your code here
                 }}
+                onClick={navBarAbrir}
             >
                 <SideNav.Toggle />
                 <SideNav.Nav defaultSelected="home">
@@ -141,42 +148,43 @@ export default function Dashboard() {
                             Dashboard
                         </NavText>
                     </NavItem>
-                    <NavItem eventKey="professores">
+                    {(userType === 'ADMINISTRADOR') && <NavItem eventKey="professores">
                         <NavIcon>
-                            <i style={{ fontSize: '1.75em' }} />
-                            <SupervisedUserCircleIcon style={{ fontSize: 40 }}></SupervisedUserCircleIcon>
+                            <i style={{fontSize: '1.75em'}}/>
+                            <SupervisedUserCircleIcon style={{fontSize: 40}}></SupervisedUserCircleIcon>
                         </NavIcon>
                         <NavText>
                             Professores
                         </NavText>
-                    </NavItem>
-                    <NavItem eventKey="alunos">
+                    </NavItem>}
+                    {(userType === 'ADMINISTRADOR') && <NavItem eventKey="alunos">
                         <NavIcon>
-                            <i style={{ fontSize: '1.75em' }} />
-                            <PeopleAltIcon style={{ fontSize: 40 }} ></PeopleAltIcon>
+                            <i style={{fontSize: '1.75em'}}/>
+                            <PeopleAltIcon style={{fontSize: 40}}></PeopleAltIcon>
                         </NavIcon>
                         <NavText>
                             Alunos
                         </NavText>
-                    </NavItem>
-                    <NavItem eventKey="movimentos">
+                    </NavItem>}
+                    {(userType === 'ADMINISTRADOR') && <NavItem eventKey="movimentos">
                         <NavIcon>
-                            <i style={{ fontSize: '1.75em' }} />
-                            <PlaylistAddCheckOutlinedIcon color="primary" style={{ fontSize: 40 }} ></PlaylistAddCheckOutlinedIcon>
+                            <i style={{fontSize: '1.75em'}}/>
+                            <PlaylistAddCheckOutlinedIcon color="primary"
+                                                          style={{fontSize: 40}}></PlaylistAddCheckOutlinedIcon>
                         </NavIcon>
                         <NavText>
                             Movimentos
                         </NavText>
-                    </NavItem>
-                    <NavItem eventKey="gerador">
+                    </NavItem>}
+                    {(userType === 'ADMINISTRADOR') && <NavItem eventKey="gerador">
                         <NavIcon>
-                            <i style={{ fontSize: '1.75em' }} />
-                            <SettingsIcon style={{ fontSize: 40 }}></SettingsIcon>
+                            <i style={{fontSize: '1.75em'}}/>
+                            <SettingsIcon style={{fontSize: 40}}></SettingsIcon>
                         </NavIcon>
                         <NavText>
                             Gerador
                         </NavText>
-                    </NavItem>
+                    </NavItem>}
                 </SideNav.Nav>
             </SideNav>
         </div>
