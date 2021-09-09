@@ -55,12 +55,12 @@ userSchema.pre(
 );
 
 //Função para verificar se a senha usada é igual a senha armazenada no banco de dados
-userSchema.methods.isValidPassword = async function(password) {
-    const user = this;
-    const compare = await bcrypt.compare(password, user.password);
-
-    return compare;
-}
+// userSchema.methods.isValidPassword = async function(password) {
+//     const user = this;
+//     const compare = bcrypt.compareSync(password, user.password);
+//
+//     return compare;
+// } Essa função seria usada no passport/setup.js dentro do LocalStrategy para verificar a senha, mas não funciona
 
 //Utiliza das opções do plugin passport-local-mongoose para definir o campo 'email' como 'username' na hora de logar
 //https://github.com/saintedlama/passport-local-mongoose#options

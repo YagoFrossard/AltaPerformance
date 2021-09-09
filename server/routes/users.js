@@ -149,7 +149,7 @@ router.route('/login').post((req, res, next) => {
             return res.status(400).json({errors: "Erro"});
         }
         if(!user){
-            return res.status(404).json({errors: "Usuário não encontrado"});
+            return res.status(404).json({errors: "Usuário/Senha incorretos"});
         }
         req.logIn(user, { session: false}, function(err) {
             if(err){
@@ -168,11 +168,11 @@ router.route('/login').post((req, res, next) => {
 //     '/login',
 //     async (req, res, next) => {
 //         passport.authenticate(
-//             'login',
+//             'local',
 //             async (err, user, info) => {
 //                 try {
 //                     if (err || !user) {
-//                         const error = new Error('An error occurred.');
+//                         const error = new Error('An error occurredd.');
 //
 //                         return next(error);
 //                     }

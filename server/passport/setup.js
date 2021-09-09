@@ -13,26 +13,27 @@ require('dotenv').config();
 
 //Usando LocalStrategy do passport
 passport.use(
-    new LocalStrategy({ usernameField: 'email' },
-    (email, password, done) => {
-    //Procurar usuário no banco de dados
-    User.findOne({ email: email })
-        .then(user => {
-            if(!user){
-                return done(null, false, { message: "Credenciais inválidas."})
-            }
-            const isMatch = user.isValidPassword(password);//bcrypt.compareSync(password, user.password);
-            if (isMatch) {
-                return done(null, user, { message: "Logado com sucesso."});
-            } else {
-                return done(null, false, { message: "Credenciais inválidas." });
-            }
+    new LocalStrategy(
+        { usernameField: 'email', passwordField: 'password' },
+        (email, password, done) => {
+            //Procurar usuário no banco de dadoss
+            User.findOne({ email: email })
+                .then(user => {
+                    if(!user){
+                        return done(null, false, { message: "Credenciais inválidas."})
+                    }
+                    const isMatch = bcrypt.compareSync(password, user.password);
+                    if (isMatch) {
+                        return done(null, user, { message: "Logado com sucesso."});
+                    } else {
+                        return done(null, false, { message: "Credenciais inválidas." });
+                    }
+                })
+                .catch(err => {
+                    console.log("Não achou a porra do usuário");
+                    return done(null, err, { message: "Ocorreu algum erro inesperado." });
+                });
         })
-        .catch(err => {
-            console.log("Não achou a porra do usuário");
-            return done(null, err, { message: "Ocorreu algum erro inesperado." });
-        });
-    })
 );
 
 

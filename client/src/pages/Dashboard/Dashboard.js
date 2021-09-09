@@ -11,6 +11,7 @@ import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import PlaylistAddCheckOutlinedIcon from '@material-ui/icons/PlaylistAddCheckOutlined';
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import Icon from '@material-ui/core/Icon';
 import { Redirect, useHistory } from 'react-router-dom';
 import {logout as logoutAuth} from "../../services/auth.service";
 import authHeader from "../../services/auth.header";
@@ -101,6 +102,56 @@ export default function Dashboard() {
         setNavbar(!navBarAtiva);
     }
 
+    // Use este link para os 'icons' https://fonts.google.com/icons
+    const navBarItems = [
+        {
+            key: "dashboard",
+            title: "Dashboard",
+            icon: "view_quilt",
+            roleNeeded: ""
+        },
+        {
+            key: "professores",
+            title: "Professores",
+            icon: "supervised_user_circle",
+            roleNeeded: "PROFESSOR"
+        },
+        {
+            key: "aluno",
+            title: "Aluno",
+            icon: "people_alt",
+            roleNeeded: "ALUNO"
+        },
+        {
+            key: "movimentos",
+            title: "Movimentos",
+            icon: "playlist_add_check",
+            roleNeeded: ""
+        },
+        {
+            key: "gerador",
+            title: "Gerador",
+            icon: "settings",
+            roleNeeded: "PROFESSOR"
+        }
+    ]
+
+    const roleLevel = (user_type) => {
+        switch (user_type) {
+            case 'ADMINISTRADOR':
+                return 2;
+                break;
+            case 'PROFESSOR':
+                return 1;
+                break;
+            case 'ALUNO':
+                return 0;
+                break;
+            default:
+                return 0;
+        }
+    }
+
     return (
         <div>
             <AppBar id="sdb" position={"static"} className={classes.root}>
@@ -139,52 +190,23 @@ export default function Dashboard() {
             >
                 <SideNav.Toggle />
                 <SideNav.Nav defaultSelected="home">
-                    <NavItem eventKey="dashboard">
-                        <NavIcon>
-                            <i style={{ fontSize: '1.75em' }} />
-                            <ViewQuiltOutlinedIcon style={{ fontSize: 40 }} ></ViewQuiltOutlinedIcon>
-                        </NavIcon>
-                        <NavText>
-                            Dashboard
-                        </NavText>
-                    </NavItem>
-                    {(userType === 'ADMINISTRADOR') && <NavItem eventKey="professores">
-                        <NavIcon>
-                            <i style={{fontSize: '1.75em'}}/>
-                            <SupervisedUserCircleIcon style={{fontSize: 40}}></SupervisedUserCircleIcon>
-                        </NavIcon>
-                        <NavText>
-                            Professores
-                        </NavText>
-                    </NavItem>}
-                    {(userType === 'ADMINISTRADOR') && <NavItem eventKey="alunos">
-                        <NavIcon>
-                            <i style={{fontSize: '1.75em'}}/>
-                            <PeopleAltIcon style={{fontSize: 40}}></PeopleAltIcon>
-                        </NavIcon>
-                        <NavText>
-                            Alunos
-                        </NavText>
-                    </NavItem>}
-                    {(userType === 'ADMINISTRADOR') && <NavItem eventKey="movimentos">
-                        <NavIcon>
-                            <i style={{fontSize: '1.75em'}}/>
-                            <PlaylistAddCheckOutlinedIcon color="primary"
-                                                          style={{fontSize: 40}}></PlaylistAddCheckOutlinedIcon>
-                        </NavIcon>
-                        <NavText>
-                            Movimentos
-                        </NavText>
-                    </NavItem>}
-                    {(userType === 'ADMINISTRADOR') && <NavItem eventKey="gerador">
-                        <NavIcon>
-                            <i style={{fontSize: '1.75em'}}/>
-                            <SettingsIcon style={{fontSize: 40}}></SettingsIcon>
-                        </NavIcon>
-                        <NavText>
-                            Gerador
-                        </NavText>
-                    </NavItem>}
+                    {navBarItems.map(
+                        (item, index) => {
+                            if(roleLevel(userType) >= roleLevel(item.roleNeeded)) {
+                                return(
+                                <NavItem eventKey={item.key} key={index}>
+                                    <NavIcon>
+                                        <i style={{fontSize: '1.75em'}}/>
+                                        <Icon fontSize={"large"}>{item.icon}</Icon>
+                                    </NavIcon>
+                                    <NavText>
+                                        {item.title}
+                                    </NavText>
+                                </NavItem>
+                                )
+                            }
+                        }
+                    )}
                 </SideNav.Nav>
             </SideNav>
         </div>
