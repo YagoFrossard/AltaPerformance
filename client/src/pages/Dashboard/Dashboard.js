@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     },
     avataricon: {
         marginRight: theme.spacing(3)
-    },
+    }
 }));
 
 export default function Dashboard() {
@@ -83,8 +83,6 @@ export default function Dashboard() {
             .catch(err => console.log(err + "Erro ao deslogar"));
     }
 
-    // TODO :   Criar página bonitinha pro perfil do usuário
-    //          Refazer a side-bar com mr-auto e as paradas melhores com for...
     const paginaPerfil = (e) => {
         e.preventDefault();
         axios.get('http://localhost:5000/secure/profile', {
@@ -114,7 +112,7 @@ export default function Dashboard() {
             key: "professores",
             title: "Professores",
             icon: "supervised_user_circle",
-            roleNeeded: "PROFESSOR"
+            roleNeeded: "ADMINISTRADOR"
         },
         {
             key: "aluno",
@@ -159,9 +157,9 @@ export default function Dashboard() {
                     <IconButton className={classes.menuButton} edge="start" color="inherit" aria-label="menu">
                         <ViewModuleIcon fontSize={'large'} />
                     </IconButton>
-                    <Typography align={"flexDirection"} variant={"h6"} className={classes.title} style={{ marginLeft : navBarAtiva ? 170 : 0}}>
+                    <Typography align={"flexDirection"} variant={"h6"} className={classes.title} style={{marginLeft : navBarAtiva ? 170 : 0,transition: 'margin-left 0.2s ease 0s'}}>
                         ALTA
-                        <>PERFORMANCE</>
+                        <span style={{fontWeight: 'bold'}}>PERFORMANCE</span>
                     </Typography>
                     <AccountCircleIcon
                         className={classes.avataricon}
@@ -209,6 +207,7 @@ export default function Dashboard() {
                     )}
                 </SideNav.Nav>
             </SideNav>
+            <div style={{ marginLeft : navBarAtiva ? 240 : 64, transition: 'margin-left 0.2s ease 0s'}} >Testeeeeeeeeeeeeeeeeeeeeeeeee</div>
         </div>
     );
 }

@@ -11,11 +11,11 @@ const jwt = require("jsonwebtoken");
 //     sameSite: "none",
 // };
 
-exports.getToken = (user) => {
-    return jwt.sign(user, process.env.TOKEN_SECRET, {
-        expiresIn: eval("900"),
-    });
-};
+// exports.getToken = (user) => {
+//     return jwt.sign(user, process.env.TOKEN_SECRET, {
+//         expiresIn: eval("900"),
+//     });
+// };
 
 // exports.getRefreshToken = (user) => {
 //     const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, {

@@ -6,12 +6,13 @@ let User = require('../models/user.model');
 const passport = require("../passport/setup");
 const salt = 3;
 
-const {
-    getToken,
-    //COOKIE_OPTIONS,
-    getRefreshToken,
-    verifyUser,
-} = require("../authenticate");
+// const {
+//     getToken,
+//     //COOKIE_OPTIONS,
+//     getRefreshToken,
+//     verifyUser,
+// } = require("../authenticate");
+
 const jwt = require("jsonwebtoken");
 
 router.route('/').get((req, res) => {
@@ -55,7 +56,7 @@ router.post("/signup", (req, res, next) => {
         });
     } else {
         const email = req.body.email;
-        const password = req.body.password;//bcrypt.hashSync(req.body.password, salt)
+        const password = req.body.password;
         const name = req.body.name;
         const telephone_number = req.body.telephone_number;
         const user_type = req.body.user_type;
@@ -73,72 +74,8 @@ router.post("/signup", (req, res, next) => {
         newUser.save()
             .then(() => res.json('Usuário adicionado!'))
             .catch(err => res.status(400).json(`Erro: ${err}`));
-        // User.register(
-        //     new User({ username: req.body.username }),
-        //     req.body.password,
-        //     (err, user) => {
-        //         if (err) {
-        //             res.statusCode = 500;
-        //             res.send(err);
-        //         } else {
-        //             user.firstName = req.body.firstName;
-        //             user.lastName = req.body.lastName || "";
-        //             const token = getToken({ _id: user._id });
-        //             const refreshToken = getRefreshToken({ _id: user._id });
-        //             user.refreshToken.push({ refreshToken });
-        //             user.save((err, user) => {
-        //                 if (err) {
-        //                     res.statusCode = 500;
-        //                     res.send(err);
-        //                 } else {
-        //                     res.cookie("refreshToken", refreshToken, COOKIE_OPTIONS);
-        //                     res.send({ success: true, token });
-        //                 }
-        //             });
-        //         }
-        //     }
-        // );
     }
 });
-
-// router.route('/signup').post(async (req, res, next) => {
-//     passport.authenticate('signup', { session: false });
-//     res.json({
-//         message: 'Usuário cadastrado com sucesso',
-//         user: req.user
-//     });
-// });
-
-// router.post(
-//     '/signup',
-//     passport.authenticate('signup', { session: false }),
-//     async (req, res, next) => {
-//         res.json({
-//             message: 'Signup successful',
-//             user: req.user
-//         });
-//     }
-// );
-
-// router.post("/login", passport.authenticate("local"), (req, res, next) => {
-//     const token = getToken({ _id: req.user._id });
-//     //const refreshToken = getRefreshToken({ _id: req.user._id });
-//     User.findOne({email: req.user.email}).then(
-//         (user) => {
-//             //user.refreshToken.push({ refreshToken });
-//             user.save((err, user) => {
-//                 if (err) {
-//                     res.statusCode = 500;
-//                     res.send(err);
-//                 } else {
-//                     //res.cookie("refreshToken", refreshToken, COOKIE_OPTIONS);
-//                     res.send({ success: true, token });
-//                 }
-//             });
-//         },
-//         (err) => next(err)
-//     );
-// });
 
 router.route('/login').post((req, res, next) => {
     passport.authenticate(
