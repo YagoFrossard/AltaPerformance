@@ -60,15 +60,13 @@ router.post("/signup", (req, res, next) => {
         const name = req.body.name;
         const telephone_number = req.body.telephone_number;
         const user_type = req.body.user_type;
-        const username = req.body.username;
 
         const newUser = new User({
             email,
             password,
             name,
             telephone_number,
-            user_type,
-            username
+            user_type
         });
 
         newUser.save()
