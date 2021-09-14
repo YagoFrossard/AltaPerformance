@@ -77,12 +77,12 @@ app.get('/logout', (req, res, next) => {
 const userRouter = require('./routes/users');
 //const loginRouter = require('./routes/authenticate');
 const secureRouter = require('./routes/secure-routes');
-//const exerciseRouter = require('./routes/exercises');
+const exerciseRouter = require('./routes/exercises');
 
 app.use('/user', userRouter);
 //app.use('/auth', loginRouter);
 app.use('/secure', passport.authenticate('jwt', { session: false }), secureRouter);
-//app.use('/exercises', exerciseRouter);
+app.use('/exercises', exerciseRouter);
 
 // Handle errors.
 app.use(function(err, req, res, next) {
