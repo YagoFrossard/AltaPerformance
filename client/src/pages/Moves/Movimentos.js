@@ -16,6 +16,29 @@ import { Link as LinkRouter, useHistory, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { login } from "../../containers/ServiceAuth";
 
+const onSubmit = (e) => {
+    e.preventDefault();
+    const exerciseData = {
+        //No momento está tudo como String, mas se vocês virem uma maneira
+        //melhor de fazer isso, só avisar que eu mudo no Schema
+      name: name,
+      name_translated: name_translated,
+      link: link,
+      difficulty: difficulty,
+      category: category,
+      stage: stage,
+      type: type
+    };
+
+    axios.post('http://localhost:5000/exercises/add', exerciseData, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      withCredentials: true
+    })
+      .then(res => console.log(res.data));
+  }
+
 export default function Cadastro_Movimentos() {
     return (
         <div>

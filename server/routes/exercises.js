@@ -3,12 +3,11 @@ let Exercise = require('../models/execise.model');
 
 router.route('/').get((req, res) => {
     Exercise.find()
-        .then(users => res.json(users))
+        .then(exercises => res.json(exercises))
         .catch(err => res.status(400).json(`Erro: ${err}`));
 });
 
 router.route('/add').post((req, res) => {
-    //Terminar o Schema dos exercícios antes de fazer isso
 
     const name = req.body.name;
     const name_translated = req.body.name_translated;
@@ -29,7 +28,7 @@ router.route('/add').post((req, res) => {
     });
 
     newExercise.save()
-        .then(() => res.json('Usuário adicionado!'))
+        .then(() => res.json('Exercício adicionado!'))
         .catch(err => res.status(400).json(`Erro: ${err}`));
 });
 
