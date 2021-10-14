@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const passport = require('./passport/setup');
+const path = require("path");
 
 require('dotenv').config();
 
@@ -88,6 +89,14 @@ app.use('/exercises', exerciseRouter);
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.json({ error: err });
+});
+
+// ... other app.use middleware 
+app.use(express.static(path.join(__dirname, "client", "build")));
+
+// Right before your app.listen(), add this:
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
 //Inicializando o servidor 
