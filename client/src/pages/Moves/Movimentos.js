@@ -30,7 +30,7 @@ const onSubmit = (e) => {
       type: type
     };
 
-    axios.post('http://localhost:5000/exercises/add', exerciseData, {
+    axios.post('https://alta-performance.herokuapp.com/exercises/add', exerciseData, {
       headers: {
         'Content-Type': 'application/json'
       },
