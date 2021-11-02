@@ -106,7 +106,7 @@ export default function Signup() {
       user_type: "PROFESSOR"
     }
 
-    axios.post('http://localhost:5000/users/add', user)
+    axios.post('https://alta-performance.herokuapp.com/users/add', user)
       .then(res => console.log(res.data))
   }
 

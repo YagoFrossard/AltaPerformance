@@ -45,7 +45,7 @@ export default function Dashboard() {
     let history = useHistory();
 
     useEffect(() => {
-        axios.get('http://localhost:5000/user/me', {
+        axios.get('https://alta-performance.herokuapp.com/user/me', {
             headers: authHeader(),
             withCredentials: true
         })
@@ -71,7 +71,7 @@ export default function Dashboard() {
 
     const logout = (e) => {
         e.preventDefault();
-        axios.get('http://localhost:5000/logout', {
+        axios.get('https://alta-performance.herokuapp.com/logout', {
             headers: {
                 'Content-Type': 'application/json'
             }, withCredentials: true
@@ -85,7 +85,7 @@ export default function Dashboard() {
 
     const paginaPerfil = (e) => {
         e.preventDefault();
-        axios.get('http://localhost:5000/secure/profile', {
+        axios.get('https://alta-performance.herokuapp.com/secure/profile', {
             headers: authHeader(),
             withCredentials: true
         })
