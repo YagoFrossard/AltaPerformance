@@ -21,6 +21,7 @@ router.route('/').get((req, res) => {
         .catch(err => res.status(400).json(`Erro: ${err}`));
 });
 //verifyUser //
+
 router.get("/me", passport.authenticate('jwt', {session: false}) ,(req, res, next) => {
     res.send(req.user);
 });

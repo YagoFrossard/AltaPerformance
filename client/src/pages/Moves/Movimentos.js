@@ -4,6 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import { FormGroup } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -14,9 +15,10 @@ import logo_alta from '../../assets/logo_alta.png'
 import Footer from '../../components/Footer'
 import { Link as LinkRouter, useHistory, Redirect } from 'react-router-dom';
 import axios from 'axios';
-import { login } from "../../containers/ServiceAuth";
-import link from '../../../envClient';
+//import { login } from "../../containers/ServiceAuth";
+import link from '../../envClient';
 
+/*
 const onSubmit = (e) => {
     e.preventDefault();
     const exerciseData = {
@@ -39,13 +41,13 @@ const onSubmit = (e) => {
     })
       .then(res => console.log(res.data));
   }
-
-export default function Cadastro_Movimentos() {
+*/
+export default function Movimentos() {
     return (
         <div>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
-                <div className={classes.paper}>
+                <div>
                     <Grid container justify="center">
                     </Grid>
                     <form>
@@ -82,7 +84,7 @@ export default function Cadastro_Movimentos() {
                     </FormGroup>
                 </div>
                 <Box mt={8}>
-                    <Copyright />
+                    {/*<Copyright />*/}
                 </Box>
             </Container>
         </div>

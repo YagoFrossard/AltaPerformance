@@ -53,7 +53,7 @@ export default function Dashboard() {
             .then(res => {
                 setUser(res.data.name);
                 setUserType(res.data.user_type);
-                console.log(res.data);
+                //console.log(res.data);
             })
             .catch(err => console.log(err));
     }, [])
@@ -192,8 +192,9 @@ export default function Dashboard() {
                     {navBarItems.map(
                         (item, index) => {
                             if(roleLevel(userType) >= roleLevel(item.roleNeeded)) {
-                                return(
+                                return(     
                                 <NavItem eventKey={item.key} key={index}>
+                                    {/*Adicionar onClick no NavItem e adicionar link nos dados lá*/}
                                     <NavIcon>
                                         <i style={{fontSize: '1.75em'}}/>
                                         <Icon fontSize={"large"}>{item.icon}</Icon>
