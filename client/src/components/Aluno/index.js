@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Dashboard from '../../pages/Dashboard/Dashboard';
+import link from '../../envClient';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -106,7 +107,7 @@ export default function Signup() {
             user_type: "ALUNO"
         }
 
-        axios.post('http://localhost:5000/users/add', user)
+        axios.post(`${link}/users/add`, user)
             .then(res => console.log(res.data))
     }
 

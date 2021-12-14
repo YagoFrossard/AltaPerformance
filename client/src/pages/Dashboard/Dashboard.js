@@ -15,6 +15,7 @@ import Icon from '@material-ui/core/Icon';
 import { Redirect, useHistory } from 'react-router-dom';
 import {logout as logoutAuth} from "../../services/auth.service";
 import authHeader from "../../services/auth.header";
+import link from '../../envClient';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -45,7 +46,7 @@ export default function Dashboard() {
     let history = useHistory();
 
     useEffect(() => {
-        axios.get('http://localhost:5000/user/me', {
+        axios.get(`${link}/user/me`, {
             headers: authHeader(),
             withCredentials: true
         })
@@ -71,7 +72,7 @@ export default function Dashboard() {
 
     const logout = (e) => {
         e.preventDefault();
-        axios.get('http://localhost:5000/logout', {
+        axios.get(`${link}/logout`, {
             headers: {
                 'Content-Type': 'application/json'
             }, withCredentials: true
@@ -85,7 +86,7 @@ export default function Dashboard() {
 
     const paginaPerfil = (e) => {
         e.preventDefault();
-        axios.get('http://localhost:5000/secure/profile', {
+        axios.get(`${link}/secure/profile`, {
             headers: authHeader(),
             withCredentials: true
         })

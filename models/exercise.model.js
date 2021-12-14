@@ -10,15 +10,15 @@ const exerciseSchema = new Schema({
         trim: true,
         minlength: 1
     },
-    video_link: {
-        type: String,
-        required: true,
-        unique: false,
-    },
     name_translated: {
         type: String,
         required: true,
-        unique: false,
+        trim: true,
+        minlength: 10
+    },
+    link: {
+        type: String,
+        required: true,
         trim: true,
         minlength: 0
     },
