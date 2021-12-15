@@ -107,31 +107,36 @@ export default function Dashboard() {
             key: "dashboard",
             title: "Dashboard",
             icon: "view_quilt",
-            roleNeeded: ""
+            roleNeeded: "",
+            goToLink: "/dashboard"
         },
         {
             key: "professores",
             title: "Professores",
             icon: "supervised_user_circle",
-            roleNeeded: "ADMINISTRADOR"
+            roleNeeded: "ADMINISTRADOR",
+            goToLink: "/"
         },
         {
             key: "aluno",
             title: "Aluno",
             icon: "people_alt",
-            roleNeeded: "ALUNO"
+            roleNeeded: "ALUNO",
+            goToLink: "/"
         },
         {
             key: "movimentos",
             title: "Movimentos",
             icon: "playlist_add_check",
-            roleNeeded: ""
+            roleNeeded: "",
+            goToLink: "/cadmov"
         },
         {
             key: "gerador",
             title: "Gerador",
             icon: "settings",
-            roleNeeded: "PROFESSOR"
+            roleNeeded: "PROFESSOR",
+            goToLink: "/"
         }
     ]
 
@@ -193,8 +198,7 @@ export default function Dashboard() {
                         (item, index) => {
                             if(roleLevel(userType) >= roleLevel(item.roleNeeded)) {
                                 return(     
-                                <NavItem eventKey={item.key} key={index}>
-                                    {/*Adicionar onClick no NavItem e adicionar link nos dados lá*/}
+                                <NavItem eventKey={item.key} key={index} onClick={()=>{history.push(item.goToLink)}}>
                                     <NavIcon>
                                         <i style={{fontSize: '1.75em'}}/>
                                         <Icon fontSize={"large"}>{item.icon}</Icon>

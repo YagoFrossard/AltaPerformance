@@ -80,7 +80,7 @@ export default function Movimentos() {
                         <FormControlLabel control={<Checkbox />} label="Core" color="secondary"/>
                         <FormControlLabel control={<Checkbox />} label="Força" color="secondary"/>
                         <FormControlLabel control={<Checkbox />} label="Metabólico" color="secondary"/>
-                        //O "onclick" do FormControlLabel é onChange, com a mesma estrutura
+                        {/*O "onclick" do FormControlLabel é onChange, com a mesma estrutura*/}
                     </FormGroup>
                 </div>
                 <Box mt={8}>
