@@ -176,7 +176,7 @@ export default function Dashboard() {
                         {"Bem-Vindo, " + loggedUser + " "}
                         {new Date(hora).toLocaleDateString() + " " + new Date(hora).toLocaleTimeString()}
                         <Button type="submit"
-                            fullWidth
+                            fullWidth = {false}
                             size="small"
                             onClick={logout}
                             variant="contained" >Logout
