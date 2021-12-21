@@ -15,10 +15,12 @@ import Footer from '../../components/Footer'
 import { Link as LinkRouter, useHistory, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { login } from "../../containers/ServiceAuth";
+import Dashboard from '../../pages/Dashboard/Dashboard';
 
 export default function Cadastro_Movimentos() {
     return (
         <div>
+            <Dashboard></Dashboard>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <div className={classes.paper}>

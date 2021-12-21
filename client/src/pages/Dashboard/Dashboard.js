@@ -172,14 +172,15 @@ export default function Dashboard() {
                         style={{ fontSize: 50 }}
                         onToggle={paginaPerfil}
                     ></AccountCircleIcon>
-                    <Typography align={"right"}>
+                    <Typography align={"left"}>
                         {"Bem-Vindo, " + loggedUser + " "}
                         {new Date(hora).toLocaleDateString() + " " + new Date(hora).toLocaleTimeString()}
-                        <Button type="submit"
-                            size="small"
-                            fontSize="inherit"
+                        <Button 
+                            type="submit"
+                            size="medium"
                             onClick={logout}
-                            variant="contained" >Logout
+                            variant="contained">
+                            Logout
                         </Button>
                     </Typography>
                 </Toolbar>
