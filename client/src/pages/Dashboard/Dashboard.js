@@ -176,8 +176,8 @@ export default function Dashboard() {
                         {"Bem-Vindo, " + loggedUser + " "}
                         {new Date(hora).toLocaleDateString() + " " + new Date(hora).toLocaleTimeString()}
                         <Button type="submit"
-                            fullWidth = {false}
                             size="small"
+                            fontSize="inherit"
                             onClick={logout}
                             variant="contained" >Logout
                         </Button>
